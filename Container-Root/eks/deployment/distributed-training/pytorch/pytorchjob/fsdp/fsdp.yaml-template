@@ -28,15 +28,16 @@ spec:
         spec:
           volumes:
             - name: shmem
-              #emptyDir:
-              #  medium: Memory
               hostPath: 
                 path: /dev/shm
             - name: local
               hostPath:
                 path: /mnt/k8s-disks/0
-          #nodeSelector:
-          #  node.kubernetes.io/instance-type: "${INSTANCE_TYPE}"
+            - name: persistent-storage
+              persistentVolumeClaim:
+                claimName: fsx-claim
+          nodeSelector:
+            node.kubernetes.io/instance-type: "${INSTANCE_TYPE}"
           containers:
             - name: pytorch
               image: ${REGISTRY}${IMAGE}${TAG}
@@ -95,3 +96,5 @@ spec:
                   mountPath: /dev/shm
                 - name: local
                   mountPath: /local
+                - name: persistent-storage
+                  mountPath: /data

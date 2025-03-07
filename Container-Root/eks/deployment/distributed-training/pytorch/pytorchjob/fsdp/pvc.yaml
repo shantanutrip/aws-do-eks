@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fsx-claim
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: fsx-sc
+  resources:
+    requests:
+      storage: 1200Gi
+
+## After Creating this, wait for a couple of minutes for PVC to be created.
+## Check with command `kubectl get pvc`
+## This command takes roughly 8-10 minutes

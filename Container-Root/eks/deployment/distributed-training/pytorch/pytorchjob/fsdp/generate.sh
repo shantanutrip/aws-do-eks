@@ -16,6 +16,11 @@ cat fsdp.yaml-template | envsubst > fsdp.yaml
 
 #cat fsdp.yaml
 
+echo ""
+echo "Generating Model Processor manifest ..."
+
+cat model-processor.yaml-template | envsubst > model-processor.yaml
+
 echo "Done."
 echo ""
 

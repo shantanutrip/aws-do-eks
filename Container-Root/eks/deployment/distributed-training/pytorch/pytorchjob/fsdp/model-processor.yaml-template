@@ -1,0 +1,34 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: model-processor
+  labels:
+    app: model-processor
+spec:
+  restartPolicy: Never
+  volumes:
+    - name: shmem
+      hostPath: 
+        path: /dev/shm
+    - name: local
+      hostPath:
+        path: /mnt/k8s-disks/0
+    - name: persistent-storage
+      persistentVolumeClaim:
+        claimName: fsx-claim
+  containers:
+    - name: model-processor
+      image: ${REGISTRY}${IMAGE}${TAG}
+      imagePullPolicy: Always
+      command:
+        - bash
+        - -c
+        - "${MODEL_PROCESSOR_CMD}"
+      volumeMounts:
+        - name: shmem
+          mountPath: /dev/shm
+        - name: local
+          mountPath: /local
+        - name: persistent-storage
+          mountPath: /data

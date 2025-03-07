@@ -97,6 +97,8 @@ provisioner: fsx.csi.aws.com
 parameters:
   subnetId: ${FSX_SUBNET_ID}
   securityGroupIds: ${SECURITY_GROUP_ID}
+  deploymentType: PERSISTENT_2
+  perUnitStorageThroughput: "250"
 EOF
 kubectl apply -f fsx-storage-class.yaml
 kubectl get sc
