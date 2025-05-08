@@ -74,7 +74,7 @@ fi
 # Security Group
 echo ""
 echo "Checking security group ${FSX_SECURITY_GROUP_NAME} ..."
-SECURITY_GROUP_ID=$(aws ec2 describe-security-groups --query SecurityGroups[?GroupName=="'${FSX_SECURITY_GROUP_NAME}'"].{GroupId:GroupId} --output text)
+SECURITY_GROUP_ID=$(aws ec2 describe-security-groups --filters "Name=group-name,Values=${FSX_SECURITY_GROUP_NAME}" --query 'SecurityGroups[].GroupId' --output text)
 if [ "$SECURITY_GROUP_ID" == "" ]; then
         echo "Not found. Creating ..."
         SECURITY_GROUP_ID=$(aws ec2 create-security-group --vpc-id ${VPC_ID} --group-name ${FSX_SECURITY_GROUP_NAME} --description "FSx for Lustre Security Group" --query "GroupId" --output text)
