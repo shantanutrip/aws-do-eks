@@ -8,7 +8,7 @@ RUN echo "Using llama patch ..."
 RUN git clone https://github.com/meta-llama/llama-cookbook && \
     cd llama-cookbook && \
     git checkout a346e19df9dd1a9cddde416167732a3edd899d09 && \
-    curl -L -o patch-llama-cookbook.tar.gz https://raw.githubusercontent.com/shantanutrip/deep-learning-containers/add-llama-finetuning/examples/dlc-llama-3-finetuning-and-hosting-with-agent/patch-llama-cookbook.tar.gz && \
+    curl -L -o patch-llama-cookbook.tar.gz https://raw.githubusercontent.com/aws/deep-learning-containers/master/examples/dlc-llama-3-finetuning-and-hosting-with-agent/patch-llama-cookbook.tar.gz && \
     tar -xzf patch-llama-cookbook.tar.gz && \
     cd patch-llama-cookbook && \
     git config --global user.email "you@example.com" && \
